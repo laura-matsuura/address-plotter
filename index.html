@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery-3.1.1.js"> </script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+        console.log("hello")
+        var locations;
+        var myLatLng = {lat: 48.4106312, lng: -114.3477398};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: myLatLng
+        });
+
+        $.getJSON("places.json", function(data){
+        }).always(function(data){
+          locations = data
+          locations.forEach(function(l){
+            var marker = new google.maps.Marker({
+              position: l,
+              map: map,
+              title: 'Hello World!'
+            });
+          })
+        })
+        console.log("goodbai")
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC8ORRittWncpAu7M6L5_9SWsd-aGeeXk&callback=initMap">
+    </script>
+  </body>
+</html>
